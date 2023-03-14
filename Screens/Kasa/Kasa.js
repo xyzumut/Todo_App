@@ -4,7 +4,7 @@ import { colors } from '../../colors';
 const Kasa = () => {
   return (
     <View style={{backgroundColor:colors.dark_purple,flex:1}}>
-        <Text>Kasa</Text>
+        <Text>Özel kasa</Text>
     </View>
   );
 };
