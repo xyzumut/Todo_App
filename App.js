@@ -6,23 +6,34 @@ import {faLock, faClipboard, faAddressBook} from '@fortawesome/free-solid-svg-ic
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import { DB_Initial} from './database';
+import { createPublicTodo, DB_Initial, DB_reset, readPublicTodo} from './database';
 import { Kasa, Todolar } from './Screens/allScreens';
 import CustomDrawer from './Components/CustomDrawer/CustomDrawer';
 import { colors } from './colors';
 const Tab = createBottomTabNavigator()
 const Drawer = createDrawerNavigator()
+const DrawerOptions = {
+  drawerActiveTintColor:colors.aqua,
+  drawerInactiveTintColor:colors.aqua,
+  drawerActiveBackgroundColor:colors.aquaShadow,
+  headerStyle:{
+    backgroundColor:colors.purple,
+  },
+  headerTintColor:colors.dark_purple,
+}
+
 
 const App = () => {
   React.useEffect(()=>{
-    DB_Initial()
-  },[])
-  console.log('APP Render Oldu')
+    // DB_Initi  },[])
+    console.log('APP Render Oldu')
+  })
   return (
     <NavigationContainer>
       <Drawer.Navigator 
         drawerContent={ props => <CustomDrawer {...props} />}
         screenOptions={DrawerOptions}
+        
       > 
          <Drawer.Screen name='Todolar'  component={Todolar} options={{
             drawerIcon: () => <FontAwesomeIcon icon={faClipboard} color={colors.aqua}/>
@@ -36,12 +47,3 @@ const App = () => {
 };
 
 export default App;
-const DrawerOptions = {
-  drawerActiveTintColor:colors.aqua,
-  drawerInactiveTintColor:colors.aqua,
-  drawerActiveBackgroundColor:colors.aquaShadow,
-  headerStyle:{
-    backgroundColor:colors.purple,
-  },
-  headerTintColor:colors.aqua,
-}

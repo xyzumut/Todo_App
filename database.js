@@ -1,8 +1,11 @@
 import SQLite from 'react-native-sqlite-storage'
 
+SQLite.DEBUG(false)
+
 const db = SQLite.openDatabase({
     location:'default',
     name:'db_todo',
+
 }, () => {
     console.log('Başarılı')
 }, (err) => {
@@ -14,7 +17,7 @@ const DB_Initial = () => {
         tx.executeSql('CREATE TABLE IF NOT EXISTS publicTodo_table (id INTEGER PRIMARY KEY AUTOINCREMENT, todo NVARCHAR(400) NOT NULL, done BIT DEFAULT 0)')
         tx.executeSql('CREATE TABLE IF NOT EXISTS privateTodo_table (id INTEGER PRIMARY KEY AUTOINCREMENT, todo NVARCHAR(400) NOT NULL, done BIT DEFAULT 0)')
         tx.executeSql('CREATE TABLE IF NOT EXISTS auth_table (id INTEGER PRIMARY KEY AUTOINCREMENT, password NVARCHAR(30) NOT NULL)')
-    })  
+    },[],()=> console.log('DB initial başarılı'), () => console.log('DB inital başarısız'))  
 }
 
 const DB_reset = () => {
@@ -48,19 +51,39 @@ const readUser = () => {
 const createUser = (password) => {
     db.transaction( tx => {tx.executeSql('INSERT INTO auth_table (password) VALUES(?)',[password])})
 };
-
-const readPublicTodo = () => {
+const readPublicTodo = async () => {
+    let response = {data:[]}
+    await db.transaction(async tx =>  {
+        tx.executeSql('SELECT * FROM publicTodo_table',[],
+            (tx,result)=>{
+                for (let index = 0; index < result.rows.length; index++) {
+                    response.data = [...response.data, result.rows.item(index)]
+                    // console.log(result.rows.item(index))
+                    return response
+                }
+            },
+            (tx,err)=>{
+                return null
+            }
+        )}
+    )
+    /**
+    * response = { data:[ {done:0, todo:'Yapılacak iş1', id:1}, {done:1, todo:'Yapılacak iş2', id:2} ] } 
+    **/
+    // console.log('Sonraki response',response)
+    return response
+};
+const readPublicTodoo = () => {
     let response = {data:[]}
     db.transaction( tx => {
         tx.executeSql('SELECT * FROM publicTodo_table',[],
             (tx,result)=>{
-                console.log('Public Todo Okuma Başarılı')
                 for (let index = 0; index < result.rows.length; index++) {
                     response.data = [...response.data, result.rows.item(index)]
+                    // console.log(result.rows.item(index))
                 }
             },
             (tx,err)=>{
-                console.log('Public Todo Okuma Başarısız')
             }
         )}
     )
@@ -71,7 +94,11 @@ const readPublicTodo = () => {
 };
 
 const createPublicTodo = (todo) => {
-    db.transaction( tx => {tx.executeSql('INSERT INTO publicTodo_table (todo, done) VALUES(?,?)',[todo,0])})
+    db.transaction( tx => {tx.executeSql('INSERT INTO publicTodo_table (todo, done) VALUES(?,?)',[todo,0],
+        () => console.log('ekleme başarılı'),
+        () => console.log('ekleme Başarısız')
+    
+    )})
 };
 
 const readPrivateTodo = () => {
