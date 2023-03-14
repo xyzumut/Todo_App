@@ -1,8 +1,7 @@
-import Kasa from './Kasa/Kasa'
-import Todolar from './Todolar/Todolar'
+import Kasa from './Kasa/Kasa';
+import Todolar from './Todolar/Todolar';
 
-
-export{
+export {
     Kasa,
-    Todolar
-}
+    Todolar,
+};

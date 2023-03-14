@@ -7,6 +7,5 @@ export const colors = {
     aquaShadow:'rgba(80, 170, 175, .9)',
     dark_purple:'#2C1E3E',
     green:'#1BF108',
-    yellow:'#D0F008'
-}
- 
+    yellow:'#D0F008',
+};

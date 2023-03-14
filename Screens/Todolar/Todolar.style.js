@@ -1,0 +1,102 @@
+import { colors } from '../../colors';
+
+
+const todosMainStyles = {
+    todosMainContainerStyle:{
+        backgroundColor:colors.dark_purple,
+        flex:1,
+    },
+    todoAddContainerStyle:{
+        width:'100%',
+        height:100,
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    todoAddButtonStyle:{
+        flexDirection:'row',
+        backgroundColor:colors.purple,
+        width:210,
+        height:60,
+        justifyContent:'space-between',
+        alignItems:'center',
+        borderRadius:5,
+        paddingHorizontal:10,
+    },
+    faAddIconStyle:{
+        color:colors.aqua,
+        padding:5,
+        borderRadius:100,
+    },
+    todoAddTextStyle:{
+        color:colors.aqua,
+        fontSize:30,
+    },
+    spinnerStyle:{
+        marginLeft:'auto',
+        marginRight:'auto',
+        marginBottom:'auto',
+        marginTop:'auto',
+        width:'100%',
+        height:'100%',
+    },
+    todoDontFoundStyle:{
+        textAlign:'center',
+        marginTop:50,
+        fontSize:24,
+        color:colors.aqua,
+        fontWeight:700,
+    },
+    scroolViewStyle:{
+        width:'100%',
+        height:'100%',
+        backgroundColor:colors.purple,
+    },
+    modalMainContainerStyle:{
+        marginRight:'auto',
+        marginLeft:'auto',
+        marginTop:100,
+        backgroundColor:colors.aquaShadow,
+        width:'90%',
+        minHeight:200,
+        borderRadius:5,
+        paddingTop:20,
+    },
+    modalAddedTodoTextStyle:{
+        fontSize:18,
+        color:colors.dark_purple,
+        fontWeight:'800',
+        marginBottom:40,
+        marginLeft:25,
+    },
+    modalTodoAddInputStyle:{
+        width:300,
+        height:40,
+        backgroundColor:colors.dark_purple,
+        color:colors.aqua,
+        marginLeft:'auto',
+        marginRight:'auto',
+    },
+    modalButtonGroupsStyle:{
+        flexDirection:'row',
+        width:'100%',
+        justifyContent:'space-around',
+        marginTop:20,
+    },
+    modalButtonsContainerStyle:(type) => {
+        return (
+            {
+                paddingVertical:10,
+                width:100,
+                backgroundColor:type === 'add' ? colors.orange : colors.red,
+                borderRadius:5,
+            }
+        );
+    },
+    modalButtonsTextStyle:{
+        textAlign:'center',
+        fontSize:20,
+        fontWeight:700,
+    },
+};
+
+export default todosMainStyles;
