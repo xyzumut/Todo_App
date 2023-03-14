@@ -18,8 +18,7 @@ const DrawerOptions = {
     backgroundColor:colors.purple,
   },
   headerTintColor:colors.dark_purple,
-}
-
+};
 
 const App = () => {
   React.useEffect(()=>{
@@ -31,13 +30,13 @@ const App = () => {
         drawerContent={ props => <CustomDrawer {...props} />}
         screenOptions={DrawerOptions}
       >
-         <Drawer.Screen name={'Todolar'}  component={Todolar} options={{
-            drawerIcon: () => <FontAwesomeIcon icon={faClipboard} color={colors.aqua}/>
-         }}/>
-         <Drawer.Screen name={'Kasa'}  component={Kasa} options={{
-            drawerIcon: (props) => <FontAwesomeIcon icon={faLock} color={colors.aqua}/>,
-         }}/>
-       </Drawer.Navigator>
+        <Drawer.Screen name={'Kasa'}  component={Kasa} options={{
+          drawerIcon: (props) => <FontAwesomeIcon icon={faLock} color={colors.aqua}/>,
+        }}/>
+        <Drawer.Screen name={'Todolar'}  component={Todolar} options={{
+          drawerIcon: () => <FontAwesomeIcon icon={faClipboard} color={colors.aqua}/>
+        }}/>
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 };
