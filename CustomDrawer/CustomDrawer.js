@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {DrawerContentScrollView, DrawerItemList} from '@react-navigation/drawer';
-import { colors } from '../../colors';
+import { colors } from '../colors';
 const CustomDrawer = (props) => {
     return (
         <View style={{flex:1}}>
