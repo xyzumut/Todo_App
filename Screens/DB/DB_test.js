@@ -1,6 +1,5 @@
-import React from 'react'
-import { View, Text, Button} from 'react-native'
-import { DB_Initial, DB_reset } from '../../database'
+import React from 'react';
+import { View, Button} from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
 
 const db = SQLite.openDatabase({
@@ -12,18 +11,15 @@ const db = SQLite.openDatabase({
     console.log('Başarısız DB Test',err);
 });
 
-
-
 const DB_test = () => {
     const readUser = () => {
-        DB_Initial()
-        let response = undefined;
         db.transaction( tx => {
             tx.executeSql('SELECT * FROM privateNotes',[],
                 (tx,result)=>{
-                    response = result.rows.item(0);
-                    console.log('response:',response);
-                    console.log('result.rows:',result.rows.item(0))
+                    console.log('result.rows',result.rows)
+                    for (let index = 0; index < result.rows.length; index++) {
+                        console.log(result.rows.item(index))
+                    }
                 },
                 (tx,err)=>{
                     console.log('User Okuma Başarısız');
@@ -31,7 +27,7 @@ const DB_test = () => {
             )}
         )
     };
-    
+
     const createUser = (password) => {
         db.transaction( tx => { 
             tx.executeSql('INSERT INTO auth_table (password) VALUES(?)', [password], 
@@ -43,11 +39,19 @@ const DB_test = () => {
                 }
         ); } );
     };
+
+    const DB_reset = () => {
+        db.transaction( tx => {
+            tx.executeSql('DELETE FROM publicTodo_table');
+            tx.executeSql('DELETE FROM privateNotes');
+            tx.executeSql('DELETE FROM auth_table');
+        });
+    };
+
     return (
         <View style={{flex:1, justifyContent:'space-evenly'}}>
             <Button title='Şifre Oku' onPress={readUser}/>
             <Button title='Şifre Oluştur' onPress={() => {createUser('sifre')}}/>
-            <Button title='Initial' onPress={DB_Initial}/>
             <Button title='Reset' onPress={DB_reset}/>
         </View>
     )
