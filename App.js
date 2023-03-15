@@ -4,10 +4,9 @@ import {faLock, faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { DB_Initial } from './database';
-import { Kasa, Todolar } from './Screens/allScreens';
+import { Kasa, Todolar, DB_test } from './Screens/allScreens';
 import CustomDrawer from './Components/CustomDrawer/CustomDrawer';
 import { colors } from './colors';
-
 const Drawer = createDrawerNavigator();
 
 const DrawerOptions = {
@@ -36,6 +35,7 @@ const App = () => {
         <Drawer.Screen name={'Todolar'}  component={Todolar} options={{
           drawerIcon: () => <FontAwesomeIcon icon={faClipboard} color={colors.aqua}/>
         }}/>
+        <Drawer.Screen name='DB_Test' component={DB_test}/>
       </Drawer.Navigator>
     </NavigationContainer>
   );

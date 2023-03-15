@@ -13,16 +13,17 @@ const db = SQLite.openDatabase({
 const DB_Initial = () => {
     db.transaction( (tx) => {
         tx.executeSql('CREATE TABLE IF NOT EXISTS publicTodo_table (id INTEGER PRIMARY KEY AUTOINCREMENT, todo NVARCHAR(400) NOT NULL, done BIT DEFAULT 0)');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS privateTodo_table (id INTEGER PRIMARY KEY AUTOINCREMENT, todo NVARCHAR(400) NOT NULL, done BIT DEFAULT 0)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS privateNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, todo NVARCHAR(2000) NOT NULL)');
         tx.executeSql('CREATE TABLE IF NOT EXISTS auth_table (id INTEGER PRIMARY KEY AUTOINCREMENT, password NVARCHAR(30) NOT NULL)');
+        tx.executeSql('INSERT INTO privateNotes (todo) VALUES(?)',['Henüz Not Eklenmedi'])
     },[],()=> console.log('DB initial başarılı'), () => console.log('DB inital başarısız'));
 }
 
 const DB_reset = () => {
     db.transaction( tx => {
-        tx.executeSql('DELETE FROM auth_table');
         tx.executeSql('DELETE FROM publicTodo_table');
-        tx.executeSql('DELETE FROM privateTodo_table');
+        tx.executeSql('DELETE FROM privateNotes');
+        tx.executeSql('DELETE FROM auth_table');
     });
 };
 
