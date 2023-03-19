@@ -2,7 +2,7 @@
 ## React NAtive
 ---
 ### Görseller
-<div align="center" style="display:flex;">
+<div align="center" style="display:flex; flex-direction:row;">
     <img src="./readme/gif1.gif" style="width:45%;"/>
     <img src="./readme/gif2.gif" style="width:45%;"/>
 </div>
